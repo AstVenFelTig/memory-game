@@ -77,3 +77,28 @@ const distributeCards = () => {
 };
 
 distributeCards();
+
+let counter = 0;
+let OpenCardOne = "";
+let cardOne = "";
+let flag = true;
+
+boxCard.addEventListener("click", (event) => {
+  if (flag === true && event.target.className != "box-card") {
+    event.target.classList.add("card-open-show");
+    if (event.target.className !== "card-open card-open-show") {
+      if (counter % 2 !== 0) {
+        if (event.target.nextElementSibling.src === OpenCardOne.src) {
+        } else {
+          setTimeout(removeCard, 800, cardOne, event);
+          flag = false;
+          setTimeout(topFlag, 1000);
+        }
+      }
+      cardOne = event.target;
+      OpenCardOne = event.target.nextElementSibling;
+      counter++;
+      showCounter(counter);
+    }
+  }
+});
