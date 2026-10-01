@@ -1,0 +1,261 @@
+body {
+    background: url(./assets/img/warrper.jpg) 0 0 / cover no-repeat;
+}
+
+a {
+    text-decoration: none;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.wrapper-inactive {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.container {
+    margin: 0 auto;
+    max-width: 1024px;
+    padding: 10px;
+}
+.menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.score {
+    color: #ffffff;
+    font-size: 24px;
+}
+
+.btn-new-game {
+    cursor: pointer;
+    border: none;
+    padding: 5px 20px;
+    border-radius: 13px;
+    background-color: #78adebd0;
+    color: #ffffff;
+}
+
+.btn-new-game:hover {
+    background-color: #3468a3d0;
+}
+
+.btn-new-game:active {
+    background-color: #78adebd0;
+}
+
+.btn-score {
+    cursor: pointer;
+    border: none;
+    padding: 5px 20px;
+    border-radius: 13px;
+    background-color: #78adebd0;
+    color: #ffffff;
+}
+
+.btn-score:hover {
+    background-color: #3468a3d0;
+}
+
+.btn-score:active {
+    background-color: #78adebd0;
+}
+
+.main {
+    flex-grow: 1;
+    display: grid;
+    align-items: center;
+}
+.box-card {
+    position: relative;
+    display: grid;
+    gap: 15px;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    flex-wrap: wrap;
+}
+
+.item-cards {
+    position: relative;
+    width: 85px;
+}
+
+@media (max-width: 986px) {
+    .item-cards {
+        width: 70px;
+    }
+}
+
+.card {
+    position: relative;
+    background-color: #fff;
+    object-fit: fill;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    transition: all 0.5s ease;
+    z-index: 2;
+}
+
+.card:hover {
+    filter: brightness(45%);
+}
+
+.card-open {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    transition: all 0.5s ease;
+}
+
+.card-open-show {
+    z-index: 1;
+    transform: perspective(80px) rotateY(-180deg);
+}
+
+.footer {
+    flex-shrink: 0;
+}
+
+.footer-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.git {
+    color: #ffffff;
+    transition: all 0.5s ease;
+}
+
+.git:hover {
+    color: #8b8383;
+    transform: scale(1.3);
+}
+
+.logo {
+    width: 100px;
+    transition: all 0.5s ease;
+}
+
+.logo:hover {
+    transform: scale(1.3);
+}
+
+.modul-win {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #4889d4e7;
+    padding: 15px 60px;
+    border-radius: 15px;
+}
+
+.modul-win-open {
+    display: flex;
+}
+
+.text-win {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.box-win {
+    margin-bottom: 19px;
+}
+
+.btn-win {
+    padding: 5px 20px;
+    cursor: pointer;
+    background-color: #ffffff;
+    color: #4889d4e7;
+    font-weight: 700;
+    border: none;
+    border-radius: 20px;
+    border: 1px solid #fff;
+    transition: all 0.5s ease;
+}
+
+.btn-win:hover {
+    background-color: #4889d4e7;
+    color: #ffffff;
+    border: 1px solid #fff;
+}
+
+.NumberOfMoves {
+    margin-top: 5px;
+    color: #fff;
+}
+
+.modul-record {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #4889d4e7;
+    padding: 15px 50px;
+    border-radius: 15px;
+    max-width: 700px;
+    min-height: 400px;
+}
+
+.modul-record-open {
+    display: flex;
+}
+
+.list-record {
+    flex-grow: 1;
+    margin-top: 20px;
+}
+
+.text-record {
+    font-size: 24px;
+    color: #ffffff;
+}
+
+.record {
+    font-size: 18px;
+    color: #ffffff;
+    margin: 12px 0px;
+}
+
+.btn-record {
+    flex-shrink: 0;
+    padding: 5px 25px;
+    cursor: pointer;
+    background-color: #ffffff;
+    color: #4889d4e7;
+    font-weight: 700;
+    border: none;
+    border-radius: 20px;
+}
+
+.btn-record:hover {
+    color: #000;
+    font-weight: 400;
+}
+
+.btn-record:active {
+    color: #4889d4e7;
+    font-weight: 700;
+}
