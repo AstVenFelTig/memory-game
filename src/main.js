@@ -26,7 +26,7 @@ const listOpenCard = [
 ];
 
 const boxCard = document.querySelector(".box-card");
-let selectLevel = 20;
+let selectLevel = 16;
 let numberOfPairs = selectLevel / 2;
 
 for (let index = 0; index < selectLevel; index++) {
@@ -64,12 +64,16 @@ const getArrRandomNum = (arr) => {
 
 getArrRandomNum(randomNumOne);
 getArrRandomNum(randomNumTwo);
+//
 
 //Combining arrays
 const rezult = () => {
   return [...randomNumOne, ...randomNumTwo];
 };
 
+//
+
+//assigning pictures to the matrix
 const distributeCards = () => {
   for (let index = 0; index < rezult().length; index++) {
     cardOpen[index].src = listOpenCard[rezult()[index]];
@@ -77,6 +81,7 @@ const distributeCards = () => {
 };
 
 distributeCards();
+//
 
 let counter = 0;
 let OpenCardOne = "";
@@ -95,6 +100,7 @@ boxCard.addEventListener("click", (event) => {
           setTimeout(topFlag, 1000);
         }
       }
+      winGame(getOpenCard());
       cardOne = event.target;
       OpenCardOne = event.target.nextElementSibling;
       counter++;
@@ -111,3 +117,136 @@ function removeCard(cardOne, event) {
   cardOne.classList.remove("card-open-show");
   event.target.classList.remove("card-open-show");
 }
+
+const score = document.querySelector(".score");
+
+//show counter
+const showCounter = (counter) => {
+  score.textContent = `Score: ${counter}`;
+};
+//
+
+//modul for new game
+btnNewGame.addEventListener("click", () => {
+  newGame();
+  score.textContent = `Score: ${counter}`;
+  setTimeout(distributeCards, 500);
+});
+
+//del pic for new game
+const delPic = () => {
+  card.forEach((element) => {
+    element.classList.remove("card-open-show");
+  });
+};
+//
+
+///New game
+const newGame = () => {
+  delPic();
+  randomNumOne = [];
+  randomNumTwo = [];
+  getArrRandomNum(randomNumOne);
+  getArrRandomNum(randomNumTwo);
+  counter = 0;
+  showCounter(counter);
+};
+
+//finish game
+const getOpenCard = () => {
+  let counterOpenCard = 0;
+  card.forEach((element) => {
+    if (element.className === "card card-open-show") {
+      counterOpenCard++;
+    }
+  });
+  return counterOpenCard;
+};
+
+///Show modul win
+const btnWin = document.querySelector(".btn-win");
+const inputWin = document.querySelector(".input-win");
+const scoreRecord = {};
+
+const NumberOfMoves = document.querySelector(".NumberOfMoves");
+
+const winGame = (counterOpenCard) => {
+  if (counterOpenCard === card.length) {
+    modulWin.classList.add("modul-win-open");
+    wrapper.classList.add("wrapper-inactive");
+    NumberOfMoves.textContent = `Number Of moves: ${counter + 1}`;
+  }
+};
+
+//get data local str
+function getDataLocal() {
+  if (localStorage.getItem("scoreUser")) {
+    let dataUser = localStorage.getItem("scoreUser");
+    let dataUserScore = JSON.parse(dataUser);
+    for (const key in dataUserScore) {
+      scoreRecord[key] = dataUserScore[key];
+    }
+  }
+}
+getDataLocal();
+
+//post in record
+btnWin.addEventListener("click", () => {
+  if (inputWin.value.length !== 0) {
+    scoreRecord[inputWin.value] = counter;
+    localStorage.setItem("scoreUser", JSON.stringify(scoreRecord));
+    modulWin.classList.remove("modul-win-open");
+    inputWin.value = "";
+    getDataLocal();
+    SortRecordList();
+    openModulRec();
+  }
+});
+//
+
+//Show record
+const btnScore = document.querySelector(".btn-score");
+const textRecord = document.querySelector(".list-record");
+const btnRecord = document.querySelector(".btn-record");
+const modulRecord = document.querySelector(".modul-record");
+
+let record = document.querySelectorAll(".record");
+
+btnScore.addEventListener("click", () => {
+  openModulRec();
+  SortRecordList();
+});
+//
+
+///
+btnRecord.addEventListener("click", () => {
+  modulRecord.classList.remove("modul-record-open");
+  wrapper.classList.remove("wrapper-inactive");
+  // newGame()
+});
+
+const SortRecordList = () => {
+  let dataUser = localStorage.getItem("scoreUser");
+  let dataUserScore = JSON.parse(dataUser);
+
+  let sortRecord = [];
+  for (const key in dataUserScore) {
+    sortRecord.push([key, dataUserScore[key]]);
+  }
+  sortRecord.sort(function (a, b) {
+    return a[1] - b[1];
+  });
+
+  for (let index = 0; index < record.length; index++) {
+    if (sortRecord[index]) {
+      record[index].textContent =
+        `${sortRecord[index][0]} - ${sortRecord[index][1]}`;
+    }
+  }
+};
+////
+
+const openModulRec = () => {
+  modulRecord.classList.add("modul-record-open");
+  wrapper.classList.add("wrapper-inactive");
+};
