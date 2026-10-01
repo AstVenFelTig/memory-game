@@ -102,3 +102,12 @@ boxCard.addEventListener("click", (event) => {
     }
   }
 });
+
+const topFlag = () => {
+  flag = true;
+};
+
+function removeCard(cardOne, event) {
+  cardOne.classList.remove("card-open-show");
+  event.target.classList.remove("card-open-show");
+}
