@@ -26,7 +26,7 @@ const listOpenCard = [
 ];
 
 const boxCard = document.querySelector(".box-card");
-let selectLevel = 16;
+let selectLevel = 4;
 let numberOfPairs = selectLevel / 2;
 
 for (let index = 0; index < selectLevel; index++) {
@@ -199,7 +199,8 @@ btnWin.addEventListener("click", () => {
     inputWin.value = "";
     getDataLocal();
     SortRecordList();
-    openModulRec();
+    // openModulRec();
+    wrapper.classList.remove("wrapper-inactive");
   }
 });
 //
@@ -250,3 +251,13 @@ const openModulRec = () => {
   modulRecord.classList.add("modul-record-open");
   wrapper.classList.add("wrapper-inactive");
 };
+
+const modalBtnNewGame = document.querySelector(".modal__btn-new-game");
+
+modalBtnNewGame.addEventListener("click", () => {
+  wrapper.classList.remove("wrapper-inactive");
+  modulWin.classList.remove("modul-win-open");
+  newGame();
+  score.textContent = `Score: ${counter}`;
+  setTimeout(distributeCards, 500);
+});
