@@ -26,11 +26,11 @@ const listOpenCard = [
 ];
 
 const boxCard = document.querySelector(".box-card");
-let selectLevel = 4;
+let selectLevel = 16;
 let numberOfPairs = selectLevel / 2;
 
 for (let index = 0; index < selectLevel; index++) {
-  const pathImg = listOpenCard[index]; // или свой индекс
+  const pathImg = listOpenCard[index];
   const html = `
     <div class="item-cards">
       <img src="${coverImg}" alt="card" class="card">
@@ -190,17 +190,25 @@ function getDataLocal() {
 }
 getDataLocal();
 
-//post in record
-btnWin.addEventListener("click", () => {
+const setNameUser = () => {
   if (inputWin.value.length !== 0) {
     scoreRecord[inputWin.value] = counter;
     localStorage.setItem("scoreUser", JSON.stringify(scoreRecord));
     modulWin.classList.remove("modul-win-open");
+    wrapper.classList.remove("wrapper-inactive");
     inputWin.value = "";
     getDataLocal();
     SortRecordList();
     // openModulRec();
-    wrapper.classList.remove("wrapper-inactive");
+  }
+};
+
+//post in record
+btnWin.addEventListener("click", () => {
+  if (inputWin.value !== "") {
+    setNameUser();
+  } else {
+    alert("Enter the name");
   }
 });
 //
@@ -255,9 +263,12 @@ const openModulRec = () => {
 const modalBtnNewGame = document.querySelector(".modal__btn-new-game");
 
 modalBtnNewGame.addEventListener("click", () => {
-  wrapper.classList.remove("wrapper-inactive");
-  modulWin.classList.remove("modul-win-open");
-  newGame();
-  score.textContent = `Score: ${counter}`;
-  setTimeout(distributeCards, 500);
+  if (inputWin.value !== "") {
+    setNameUser();
+    newGame();
+    score.textContent = `Score: ${counter}`;
+    setTimeout(distributeCards, 500);
+  } else {
+    alert("Enter the name");
+  }
 });
