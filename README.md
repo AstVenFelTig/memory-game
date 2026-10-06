@@ -1,6 +1,6 @@
 # Игра Memory Game
 
-🔗 **Ссылка на игру:** [astvenfeltig.github.io/memory-game](https://astvenfeltig.github.io/memory-game/)
+🔗 **Ссылка на игру:** https://astvenfeltig.github.io/memory-game/
 
 ## Описание
 
