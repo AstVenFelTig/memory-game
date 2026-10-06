@@ -7,6 +7,108 @@ const images = import.meta.glob("./assets/img/*.{jpg,jpeg,png,webp}", {
   import: "default",
 });
 
+function createElement(tag, className, text = "") {
+  const el = document.createElement(tag);
+  if (className) el.className = className;
+  if (text) el.textContent = text;
+  return el;
+}
+
+function createWinModal() {
+  const modulWin = createElement("div", "modul-win");
+
+  const textWin = createElement("div", "text-win", "win!");
+  const boxWin = createElement("div", "box-win");
+
+  const inputWin = createElement("input", "input-win");
+  inputWin.type = "text";
+  inputWin.placeholder = "Name";
+
+  const btnWin = createElement("button", "btn-win", "Close");
+  btnWin.type = "button";
+
+  const btnNewGame = createElement("button", "modal__btn-new-game", "New game");
+  btnNewGame.type = "button";
+
+  const numberOfMoves = createElement("div", "NumberOfMoves");
+
+  boxWin.append(inputWin, btnWin, btnNewGame, numberOfMoves);
+  modulWin.append(textWin, boxWin);
+
+  return modulWin;
+}
+
+function createRecordModal() {
+  const modulRecord = createElement("div", "modul-record");
+
+  const textRecord = createElement("div", "text-record", "Top records");
+  const listRecord = createElement("div", "list-record");
+
+  for (let i = 0; i < 10; i++) {
+    listRecord.appendChild(createElement("div", "record"));
+  }
+
+  const btnRecord = createElement("button", "btn-record", "Close");
+  btnRecord.type = "button";
+
+  modulRecord.append(textRecord, listRecord, btnRecord);
+
+  return modulRecord;
+}
+
+function createWrapper() {
+  const wrapper = createElement("div", "wrapper");
+
+  const header = createElement("header", "header");
+  const headerContainer = createElement("div", "container");
+  const menu = createElement("div", "menu");
+
+  const btnNewGame = createElement("button", "btn-new-game", "New game");
+  btnNewGame.type = "button";
+
+  const score = createElement("div", "score", "Score: 0");
+
+  const btnScore = createElement("button", "btn-score", "Record");
+  btnScore.type = "button";
+
+  menu.append(btnNewGame, score, btnScore);
+  headerContainer.appendChild(menu);
+  header.appendChild(headerContainer);
+
+  const main = createElement("main", "main");
+  const mainContainer = createElement("div", "container");
+  const boxCard = createElement("div", "box-card");
+
+  mainContainer.appendChild(boxCard);
+  main.appendChild(mainContainer);
+
+  // --- Footer --- const footer = createElement("footer", "footer");
+  const footerContainer = createElement("div", "container");
+  const footerBox = createElement("div", "footer-box");
+
+  const gitLink = createElement("a", "git", "AstVentFel 2026");
+  gitLink.href = "https://github.com/AstVenFelTig";
+  gitLink.target = "_blank";
+
+  footerBox.appendChild(gitLink);
+  footerContainer.appendChild(footerBox);
+  footer.appendChild(footerContainer);
+
+  wrapper.append(header, main, footer);
+
+  return wrapper;
+}
+
+function buildPage() {
+  const app = document.body;
+
+  app.appendChild(createWinModal());
+  app.appendChild(createRecordModal());
+  app.appendChild(createWrapper());
+}
+
+buildPage();
+
 const listOpenCard = [
   images["./assets/img/feature.jpg"],
   images["./assets/img/felix.jpg"],
