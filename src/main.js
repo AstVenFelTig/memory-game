@@ -266,7 +266,5 @@ modalBtnNewGame.addEventListener("click", () => {
     newGame();
     score.textContent = `Score: ${counter}`;
     setTimeout(distributeCards, 500);
-  } else {
-    alert("Enter the name");
   }
 });
