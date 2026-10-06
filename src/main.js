@@ -207,8 +207,6 @@ const setNameUser = () => {
 btnWin.addEventListener("click", () => {
   if (inputWin.value !== "") {
     setNameUser();
-  } else {
-    alert("Enter the name");
   }
 });
 //
